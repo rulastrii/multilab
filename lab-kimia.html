@@ -179,93 +179,145 @@ body { background:#f6f8fb; font-family:Segoe UI; }
 </div>
 
 <script>
+/* =====================
+   STATE PRAKTIKUM
+===================== */
 let state = {
-  glass:false,
-  liquid:false,
-  pipet:false,
-  stirred:false,
-  lakmus:false,
-  tested:false,
-  type:null
+  glass: false,
+  liquid: false,
+  pipet: false,
+  stirred: false,
+  lakmus: false,
+  tested: false,
+  type: null
 };
 
-document.querySelectorAll('.tool').forEach(t=>{
-  t.addEventListener('dragstart',e=>{
-    e.dataTransfer.setData('item',t.dataset.item);
+/* =====================
+   DRAG SOURCE (RAK)
+===================== */
+document.querySelectorAll('.tool').forEach(tool => {
+  tool.addEventListener('dragstart', e => {
+    e.dataTransfer.setData('item', tool.dataset.item);
   });
 });
 
-const table=document.getElementById('table');
-table.addEventListener('dragover',e=>e.preventDefault());
+/* =====================
+   DROP AREA (MEJA)
+===================== */
+const table = document.getElementById('table');
+table.addEventListener('dragover', e => e.preventDefault());
 
-table.addEventListener('drop',e=>{
+table.addEventListener('drop', e => {
   e.preventDefault();
-  const item=e.dataTransfer.getData('item');
+  const item = e.dataTransfer.getData('item');
 
-  /* GELAS */
-  if(item==="glass" && !state.glass){
-    const g=document.createElement('div');
-    g.className='glass';
-    g.id='glass';
-    table.appendChild(g);
-    state.glass=true;
-    instruction("Tahap 2: Seret larutan ke gelas");
+  /* ===== 1. GELAS ===== */
+  if (item === "glass" && !state.glass) {
+    const glass = document.createElement('div');
+    glass.className = 'glass';
+    glass.id = 'glass';
+    table.appendChild(glass);
+
+    state.glass = true;
+    instruction("Tahap 2: Seret larutan ke dalam gelas kimia");
+    return;
   }
 
-  /* LARUTAN */
-  if((item==="acid"||item==="base") && state.glass && !state.liquid){
-    state.type=item;
-    const liquid=document.createElement('div');
-    liquid.className='liquid '+item;
+  /* ===== 2. LARUTAN ===== */
+  if ((item === "acid" || item === "base") && state.glass && !state.liquid) {
+    state.type = item;
+
+    const liquid = document.createElement('div');
+    liquid.className = 'liquid ' + item;
     document.getElementById('glass').appendChild(liquid);
-    setTimeout(()=>liquid.style.height='60%',100);
-    state.liquid=true;
-    instruction("Tahap 3: Seret pipet ke gelas untuk mengaduk");
+
+    setTimeout(() => liquid.style.height = '65%', 100);
+
+    state.liquid = true;
+    instruction("Tahap 3: Seret pipet ke meja, lalu ke gelas untuk mengaduk");
+    return;
   }
 
-  /* PIPET KE GELAS (ADUK) */
-  if(item==="pipet" && state.liquid && !state.stirred){
-    const glass=document.getElementById('glass');
-    glass.style.animation="shake .4s linear 3";
-    state.stirred=true;
-    instruction("Larutan sudah diaduk. Tarik pipet ke meja");
+  /* ===== 3. PIPET KE MEJA ===== */
+  if (item === "pipet" && state.liquid && !state.pipet) {
+    const pipet = document.createElement('div');
+    pipet.className = 'pipet';
+    pipet.id = 'pipet';
+    pipet.draggable = true;
+
+    pipet.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData('item', 'pipet-stir');
+    });
+
+    table.appendChild(pipet);
+    state.pipet = true;
+
+    instruction("Tahap 4: Seret pipet ke gelas untuk mengaduk larutan");
+    return;
   }
 
-  /* LAKMUS MASUK GELAS */
-  if(item==="lakmus" && state.stirred && !state.lakmus){
-    const l=document.createElement('div');
-    l.className='lakmus';
-    l.id='lakmus';
-    l.innerText='Lakmus';
-    document.getElementById('glass').appendChild(l);
-    state.lakmus=true;
-    instruction("Tarik lakmus ke meja untuk melihat hasil");
-  }
-});
+  /* ===== 4. PIPET KE GELAS (ADUK) ===== */
+  if (item === "pipet-stir" && state.pipet && !state.stirred) {
+    const glass = document.getElementById('glass');
+    glass.style.animation = "shake .4s linear 3";
 
-/* LAKMUS KELUAR = HASIL */
-table.addEventListener('dragend',()=>{
-  if(state.lakmus && !state.tested){
-    const lak=document.getElementById('lakmus');
-    lak.style.background= state.type==="acid" ? '#dc3545':'#0d6efd';
-    lak.style.color='#fff';
-    lak.style.marginBottom="20px";
+    state.stirred = true;
+    instruction("Larutan telah diaduk. Seret lakmus ke dalam gelas");
+    return;
+  }
+
+  /* ===== 5. LAKMUS KE GELAS ===== */
+  if (item === "lakmus" && state.stirred && !state.lakmus) {
+    const lakmus = document.createElement('div');
+    lakmus.className = 'lakmus';
+    lakmus.id = 'lakmus';
+    lakmus.innerText = 'Lakmus';
+    lakmus.draggable = true;
+
+    lakmus.addEventListener('dragstart', ev => {
+      ev.dataTransfer.setData('item', 'lakmus-test');
+    });
+
+    document.getElementById('glass').appendChild(lakmus);
+    state.lakmus = true;
+
+    instruction("Tahap 6: Tarik lakmus ke meja untuk melihat hasil");
+    return;
+  }
+
+  /* ===== 6. LAKMUS KE MEJA (HASIL) ===== */
+  if (item === "lakmus-test" && state.lakmus && !state.tested) {
+    const lak = document.getElementById('lakmus');
     table.appendChild(lak);
 
-    document.getElementById('resultText').innerHTML =
-      state.type==="acid"
-      ? "<b>Larutan bersifat ASAM</b><br>HCl menghasilkan ion H⁺ yang mengubah lakmus menjadi merah."
-      : "<b>Larutan bersifat BASA</b><br>NaOH menghasilkan ion OH⁻ yang mengubah lakmus menjadi biru.";
+    if (state.type === "acid") {
+      lak.style.background = "#dc3545";
+      lak.style.color = "#fff";
+      document.getElementById('resultText').innerHTML =
+        "<b>Larutan bersifat ASAM</b><br>" +
+        "Larutan HCl melepaskan ion H⁺ sehingga mengubah lakmus menjadi merah.";
+    } else {
+      lak.style.background = "#0d6efd";
+      lak.style.color = "#fff";
+      document.getElementById('resultText').innerHTML =
+        "<b>Larutan bersifat BASA</b><br>" +
+        "Larutan NaOH melepaskan ion OH⁻ sehingga mengubah lakmus menjadi biru.";
+    }
 
     document.getElementById('resultBox').classList.remove('d-none');
-    state.tested=true;
+    instruction("Eksperimen selesai ✅");
+    state.tested = true;
   }
 });
 
-function instruction(text){
-  document.getElementById('instruction').innerText=text;
+/* =====================
+   INSTRUCTION TEXT
+===================== */
+function instruction(text) {
+  document.getElementById('instruction').innerText = text;
 }
 </script>
+
 
 <script>
 let recorder, chunks=[];
