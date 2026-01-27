@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Virtual Lab Kimia – Uji Asam Basa</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<style>
+body { background:#f6f8fb; font-family:Segoe UI; }
+
+.header {
+  background:#fff;
+  padding:15px 25px;
+  border-bottom:1px solid #eee;
+  display:flex;
+  justify-content:space-between;
+}
+
+.main { display:flex; height:calc(100vh - 70px); }
+
+/* RAK */
+.rack {
+  width:300px;
+  background:#fff;
+  border-right:1px solid #eee;
+  padding:20px;
+}
+.tool {
+  background:#f1f3f7;
+  border-radius:8px;
+  padding:10px;
+  margin-bottom:10px;
+  cursor:grab;
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+
+/* WORKSPACE */
+.workspace { flex:1; padding:20px; }
+
+.card-box {
+  background:#fff;
+  border-radius:12px;
+  padding:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08);
+  margin-bottom:20px;
+}
+
+.table-area {
+  height:280px;
+  border:2px dashed #ccc;
+  border-radius:12px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  gap:30px;
+  position:relative;
+}
+
+/* OBJECT */
+.glass {
+  width:90px;
+  height:160px;
+  border:3px solid #888;
+  border-radius:0 0 14px 14px;
+  position:relative;
+  overflow:hidden;
+}
+
+.liquid {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:0%;
+  transition:height 2s;
+}
+
+.acid { background:#dc3545; }
+.base { background:#0d6efd; }
+
+/* PIPET */
+.pipet {
+  width:12px;
+  height:140px;
+  border-radius:6px;
+  background:#adb5bd;
+  position:relative;
+}
+.pipet::after {
+  content:'';
+  position:absolute;
+  bottom:-20px;
+  left:50%;
+  transform:translateX(-50%);
+  width:6px;
+  height:20px;
+  background:#6c757d;
+}
+
+/* LAKMUS */
+.lakmus {
+  width:110px;
+  height:30px;
+  background:#eee;
+  border-radius:6px;
+  text-align:center;
+  line-height:30px;
+  font-weight:600;
+  transition:.6s;
+}
+
+@keyframes shake {
+  0% { transform:rotate(0deg); }
+  25% { transform:rotate(2deg); }
+  50% { transform:rotate(-2deg); }
+  75% { transform:rotate(2deg); }
+  100% { transform:rotate(0deg); }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <h5>🧪 Virtual Lab Kimia – Uji Asam Basa</h5>
+  <span class="badge badge-info">Tahap <span id="stage">1</span></span>
+</div>
+
+<div class="main">
+
+<!-- RAK -->
+<div class="rack">
+  <h6>Rak Alat & Bahan</h6>
+
+  <div class="tool" draggable="true" data-item="glass">
+    <i class="fas fa-vial"></i> Gelas Kimia
+  </div>
+  <div class="tool" draggable="true" data-item="acid">
+    <i class="fas fa-flask"></i> Asam (HCl)
+  </div>
+  <div class="tool" draggable="true" data-item="base">
+    <i class="fas fa-flask"></i> Basa (NaOH)
+  </div>
+  <div class="tool" draggable="true" data-item="pipet">
+    <i class="fas fa-grip-lines-vertical"></i> Pipet
+  </div>
+  <div class="tool" draggable="true" data-item="lakmus">
+    <i class="fas fa-sticky-note"></i> Lakmus
+  </div>
+</div>
+
+<!-- WORKSPACE -->
+<div class="workspace">
+
+<div class="card-box">
+<h6>Meja Eksperimen</h6>
+<div class="table-area" id="table"></div>
+</div>
+
+<div class="card-box">
+<b id="instruction">Tahap 1: Seret gelas kimia</b>
+</div>
+
+<div class="card-box d-none" id="resultBox">
+<h6>Hasil</h6>
+<p id="resultText"></p>
+
+<button class="btn btn-danger" onclick="startRecord()">🎥 Rekam</button>
+<button class="btn btn-success" onclick="stopRecord()">⬇️ Unduh Video</button>
+
+</div>
+
+</div>
+</div>
+
+<script>
+let state = {
+  glass:false,
+  liquid:false,
+  pipet:false,
+  stirred:false,
+  lakmus:false,
+  tested:false,
+  type:null
+};
+
+document.querySelectorAll('.tool').forEach(t=>{
+  t.addEventListener('dragstart',e=>{
+    e.dataTransfer.setData('item',t.dataset.item);
+  });
+});
+
+const table=document.getElementById('table');
+table.addEventListener('dragover',e=>e.preventDefault());
+
+table.addEventListener('drop',e=>{
+  e.preventDefault();
+  const item=e.dataTransfer.getData('item');
+
+  /* GELAS */
+  if(item==="glass" && !state.glass){
+    const g=document.createElement('div');
+    g.className='glass';
+    g.id='glass';
+    table.appendChild(g);
+    state.glass=true;
+    instruction("Tahap 2: Seret larutan ke gelas");
+  }
+
+  /* LARUTAN */
+  if((item==="acid"||item==="base") && state.glass && !state.liquid){
+    state.type=item;
+    const liquid=document.createElement('div');
+    liquid.className='liquid '+item;
+    document.getElementById('glass').appendChild(liquid);
+    setTimeout(()=>liquid.style.height='60%',100);
+    state.liquid=true;
+    instruction("Tahap 3: Seret pipet ke gelas untuk mengaduk");
+  }
+
+  /* PIPET KE GELAS (ADUK) */
+  if(item==="pipet" && state.liquid && !state.stirred){
+    const glass=document.getElementById('glass');
+    glass.style.animation="shake .4s linear 3";
+    state.stirred=true;
+    instruction("Larutan sudah diaduk. Tarik pipet ke meja");
+  }
+
+  /* LAKMUS MASUK GELAS */
+  if(item==="lakmus" && state.stirred && !state.lakmus){
+    const l=document.createElement('div');
+    l.className='lakmus';
+    l.id='lakmus';
+    l.innerText='Lakmus';
+    document.getElementById('glass').appendChild(l);
+    state.lakmus=true;
+    instruction("Tarik lakmus ke meja untuk melihat hasil");
+  }
+});
+
+/* LAKMUS KELUAR = HASIL */
+table.addEventListener('dragend',()=>{
+  if(state.lakmus && !state.tested){
+    const lak=document.getElementById('lakmus');
+    lak.style.background= state.type==="acid" ? '#dc3545':'#0d6efd';
+    lak.style.color='#fff';
+    lak.style.marginBottom="20px";
+    table.appendChild(lak);
+
+    document.getElementById('resultText').innerHTML =
+      state.type==="acid"
+      ? "<b>Larutan bersifat ASAM</b><br>HCl menghasilkan ion H⁺ yang mengubah lakmus menjadi merah."
+      : "<b>Larutan bersifat BASA</b><br>NaOH menghasilkan ion OH⁻ yang mengubah lakmus menjadi biru.";
+
+    document.getElementById('resultBox').classList.remove('d-none');
+    state.tested=true;
+  }
+});
+
+function instruction(text){
+  document.getElementById('instruction').innerText=text;
+}
+</script>
+
+<script>
+let recorder, chunks=[];
+async function startRecord(){
+  const stream = await navigator.mediaDevices.getDisplayMedia({video:true});
+  recorder = new MediaRecorder(stream);
+  recorder.ondataavailable=e=>chunks.push(e.data);
+  recorder.start();
+}
+
+function stopRecord(){
+  recorder.stop();
+  recorder.onstop=()=>{
+    const blob=new Blob(chunks,{type:'video/webm'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download="eksperimen-kimia.webm";
+    a.click();
+  };
+}
+</script>
+
+</body>
+</html>
