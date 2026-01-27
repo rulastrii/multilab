@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiLab – Virtual Learning Simulator</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="plugins/Venobox/venobox.css">
+  <!-- aos -->
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+
+  <!-- Load Font Awesome CDN di <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+<style>
+#preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999999;
+}
+
+.loader-container {
+  text-align: center;
+}
+
+.lab-video {
+  width: 110px;
+  border-radius: 10px;
+  display: block;
+}
+
+.loading-text {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #555;
+}
+
+/* Fade out animation */
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+/* FAQ */
+.faq-item {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 10px;
+}
+
+.faq-question {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 15px 0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: left;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #091337;
+}
+
+.faq-question i {
+  transition: transform 0.3s ease;
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease;
+  font-size: 16px;
+  color: #4d546f;
+  padding-right: 20px;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  margin-bottom: 10px;
+}
+
+.faq-item.active .faq-question i {
+  transform: rotate(180deg);
+}
+
+
+</style>
+
+
+</head>
+
+<body>
+<!-- PRELOADER -->
+<div id="preloader">
+  <div class="loader-container">
+    <img src="images/erlenmeyer.gif" alt="loading" class="lab-video">
+    <p class="loading-text" id="loadingText"></p>
+  </div>
+</div>
+<!-- /PRELOADER -->
+
+<!-- navigation -->
+<section class="fixed-top navigation">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- navbar -->
+      <div class="collapse navbar-collapse text-center" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="#fitur">Fitur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="#bidang">Bidang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="panduan.html">Panduan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link page-scroll" href="#faqs">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Kontak</a>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary ml-lg-3 primary-shadow">Try Demo</a>
+      </div>
+    </nav>
+  </div>
+</section>
+<!-- /navigation -->
+
+<!-- hero area -->
+<section class="hero-section hero" data-background="" style="background-image: url(images/hero-area/banner-bg.png);">
+  <div class="container"> 
+  <div class="row">
+    <div class="col-lg-12 text-center zindex-1">
+      <h1 class="mb-3">Take Control of your<br>
+        Project and Team</h1>
+
+      <p class="mb-4">
+        Virtual Lab lintas jurusan yang memungkinkan mahasiswa dari berbagai bidang 
+        untuk bereksperimen, berkolaborasi, dan belajar secara interaktif kapan pun 
+        dan di mana pun. Semua praktikum tersedia dalam format digital yang aman, 
+        modern, dan mudah digunakan.
+      </p>
+
+      <a href="#" class="btn btn-secondary btn-lg" data-toggle="modal" data-target="#registerModal">
+  Daftar Sekarang
+</a>
+
+
+
+      <!-- banner image -->
+      <img class="img-fluid w-100 banner-image" src="images/hero-area/banner-img.png" alt="banner-img">
+    </div>
+  </div>
+</div>
+
+  <!-- background shapes -->
+  <div id="scene">
+    <img class="img-fluid hero-bg-1 up-down-animation" src="images/background-shape/feature-bg-2.png" alt="">
+    <img class="img-fluid hero-bg-2 left-right-animation" src="images/background-shape/seo-ball-1.png" alt="">
+    <img class="img-fluid hero-bg-3 left-right-animation" src="images/background-shape/seo-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-4 up-down-animation" src="images/background-shape/green-dot.png" alt="">
+    <img class="img-fluid hero-bg-5 left-right-animation" src="images/background-shape/blue-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-6 up-down-animation" src="images/background-shape/seo-ball-1.png" alt="">
+    <img class="img-fluid hero-bg-7 left-right-animation" src="images/background-shape/yellow-triangle.png" alt="">
+    <img class="img-fluid hero-bg-8 up-down-animation" src="images/background-shape/service-half-cycle.png" alt="">
+    <img class="img-fluid hero-bg-9 up-down-animation" src="images/background-shape/team-bg-triangle.png" alt="">
+  </div>
+</section>
+<!-- /hero-area -->
+
+<!-- feature -->
+<section class="section feature mb-0" id="fitur">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">Awesome Features</h2>
+        <p class="mb-100">Platform MultiLab menyediakan berbagai fitur interaktif untuk mendukung pembelajaran virtual Anda.<br>Simak beberapa fitur unggulan berikut:</p>
+      </div>
+
+      <!-- feature item -->
+      <div class="col-md-6 mb-80">
+        <div class="d-flex feature-item">
+          <div>
+            <i class="ti-ruler-pencil feature-icon mr-4"></i>
+          </div>
+          <div>
+            <h4>Eksperimen Interaktif</h4>
+            <p>Simulasi eksperimen untuk berbagai bidang studi dengan animasi dan hasil real-time, memudahkan mahasiswa belajar praktikum secara virtual.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- feature item -->
+      <div class="col-md-6 mb-80">
+        <div class="d-flex feature-item">
+          <div>
+            <i class="ti-layout-cta-left feature-icon mr-4"></i>
+          </div>
+          <div>
+            <h4>Kolaborasi Tim</h4>
+            <p>Bekerja sama dengan teman secara online untuk menyelesaikan praktikum dan proyek secara efisien dan interaktif.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- feature item -->
+      <div class="col-md-6 mb-80">
+        <div class="d-flex feature-item">
+          <div>
+            <i class="ti-game feature-icon mr-4"></i>
+          </div>
+          <div>
+            <h4>Game Edukasi</h4>
+            <p>Latihan interaktif dan kuis berbasis bidang studi untuk meningkatkan pemahaman konsep secara menyenangkan.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- feature item -->
+      <div class="col-md-6 mb-80">
+        <div class="d-flex feature-item">
+          <div>
+            <i class="ti-layers-alt feature-icon mr-4"></i>
+          </div>
+          <div>
+            <h4>Laporan Digital</h4>
+            <p>Hasil eksperimen tersimpan otomatis dan dapat diunduh dalam bentuk laporan PDF untuk dokumentasi praktikum.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- background shapes -->
+  <img class="feature-bg-1 up-down-animation" src="images/background-shape/feature-bg-1.png" alt="bg-shape">
+  <img class="feature-bg-2 left-right-animation" src="images/background-shape/feature-bg-2.png" alt="bg-shape">
+</section>
+<!-- /feature -->
+
+<!-- marketing -->
+<section class="section-lg seo" id="bidang">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <!-- IMAGE -->
+      <div class="col-md-6 mb-4 mb-md-0">
+        <div class="seo-image">
+          <img class="img-fluid" src="images/service/service.png" alt="Bidang Virtual Lab">
+        </div>
+      </div>
+
+      <!-- TEXT -->
+      <div class="col-md-6">
+        <h2 class="section-title">Bidang yang Tersedia</h2>
+        <p class="mb-4">
+          MultiLab menyediakan laboratorium virtual lintas jurusan
+          yang mendukung pembelajaran interaktif.
+        </p>
+
+        <ul class="pl-0 service-list">
+          <li>
+            <i class="fas fa-flask text-purple"></i>
+            Kimia – Praktikum kimia dasar hingga lanjutan
+          </li>
+          <li>
+            <i class="fas fa-atom text-purple"></i>
+            Sains – Fisika, Biologi, dan eksperimen interdisipliner
+          </li>
+          <li>
+            <i class="fas fa-cogs text-purple"></i>
+            Teknik – Elektro, mekanik, dan komputer
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- background -->
+  <img class="img-fluid seo-bg" src="images/backgrounds/seo-bg.png" alt="seo-bg">
+</section>
+
+<!-- /marketing -->
+
+<!-- service -->
+<section class="section-lg service" id="faqs">
+  <div class="container">
+    <div class="row justify-content-between">
+
+      <!-- TEXT (FAQ) -->
+      <div class="col-md-5 order-2 order-md-1">
+        <h2 class="section-title">Pertanyaan Umum (FAQ)</h2>
+        <p class="mb-4">
+          Beberapa pertanyaan yang sering diajukan seputar penggunaan
+          Virtual Lab MultiLab.
+        </p>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Apa itu Virtual Lab?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Virtual Lab adalah laboratorium digital yang memungkinkan mahasiswa
+            melakukan eksperimen secara online melalui simulasi interaktif.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Apakah Virtual Lab bisa digunakan tanpa alat fisik?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Ya. Semua alat dan bahan disediakan secara virtual sehingga dapat
+            digunakan kapan saja tanpa risiko dan biaya tambahan.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Apakah hasil eksperimen bisa disimpan?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Hasil eksperimen dapat disimpan otomatis dan diunduh dalam bentuk
+            laporan PDF atau dibagikan ke dosen.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            Apakah tersedia game edukasi?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Ya, tersedia game edukasi berbasis eksperimen untuk melatih logika,
+            pemahaman konsep, dan problem solving.
+          </div>
+        </div>
+
+      </div>
+
+      <!-- IMAGE -->
+      <div class="col-md-7 order-1 order-md-2">
+        <img class="img-fluid layer-3" src="images/marketing/marketing.png" alt="FAQ Virtual Lab">
+      </div>
+
+    </div>
+  </div>
+
+  <!-- background -->
+  <img class="img-fluid service-bg" src="images/backgrounds/service-bg.png" alt="service-bg">
+</section>
+
+<!-- /service -->
+
+<!-- team -->
+<section class="section-lg team" id="team">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">Our Team</h2>
+        <p class="mb-100">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu<br>
+          fugiat nulla pariatur. Excepteur sint occaecat </p>
+      </div>
+    </div>
+    <div class="col-10 mx-auto">
+      <div class="team-slider">
+        <!-- team-member -->
+        <div class="team-member">
+          <div class="d-flex mb-4">
+            <div class="mr-3">
+              <img class="rounded-circle img-fluid" src="images/team/team-1.jpg" alt="team-member">
+            </div>
+            <div class="align-self-center">
+              <h4>Becroft</h4>
+              <h6 class="text-color">web designer</h6>
+            </div>
+          </div>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. S eparated they</p>
+        </div>
+        <!-- team-member -->
+        <div class="team-member">
+          <div class="d-flex mb-4">
+            <div class="mr-3">
+              <img class="rounded-circle img-fluid" src="images/team/team-2.jpg" alt="team-member">
+            </div>
+            <div class="align-self-center">
+              <h4>John Doe</h4>
+              <h6 class="text-color">web developer</h6>
+            </div>
+          </div>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. S eparated they</p>
+        </div>
+        <!-- team-member -->
+        <div class="team-member">
+          <div class="d-flex mb-4">
+            <div class="mr-3">
+              <img class="rounded-circle img-fluid" src="images/team/team-3.jpg" alt="team-member">
+            </div>
+            <div class="align-self-center">
+              <h4>Erik Ligas</h4>
+              <h6 class="text-color">Programmer</h6>
+            </div>
+          </div>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
+            the blind texts. S eparated they</p>
+        </div>
+        <!-- team-member -->
+        <div class="team-member">
+          <div class="d-flex mb-4">
+            <div class="mr-3">
+              <img class="rounded-circle img-fluid" src="images/team/team-1.jpg" alt="team-member">
+            </div>
+            <div class="align-self-center">
+              <h4>Erik Ligas</h4>
+              <h6 class="text-color">Programmer</h6>
+            </div>
+          </div>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live
+            the blind texts. S eparated they</p>
+        </div>
+        <!-- team-member -->
+        <div class="team-member">
+          <div class="d-flex mb-4">
+            <div class="mr-3">
+              <img class="rounded-circle img-fluid" src="images/team/team-2.jpg" alt="team-member">
+            </div>
+            <div class="align-self-center">
+              <h4>John Doe</h4>
+              <h6 class="text-color">web developer</h6>
+            </div>
+          </div>
+          <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. S eparated they</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- backgound image -->
+  <img src="images/backgrounds/team-bg.png" alt="team-bg" class="img-fluid team-bg">
+  <!-- background shapes -->
+  <img class="team-bg-shape-1 up-down-animation" src="images/background-shape/seo-ball-1.png" alt="background-shape">
+  <img class="team-bg-shape-2 left-right-animation" src="images/background-shape/seo-ball-1.png" alt="background-shape">
+  <img class="team-bg-shape-3 left-right-animation" src="images/background-shape/team-bg-triangle.png" alt="background-shape">
+  <img class="team-bg-shape-4 up-down-animation img-fluid" src="images/background-shape/team-bg-dots.png" alt="background-shape">
+</section>
+<!-- /team -->
+
+<!-- pricing -->
+<section class="section-lg pb-0 pricing" id="pricing">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">Our Pricing</h2>
+        <p class="mb-50">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu <br>
+          fugiat nulla pariatur. Excepteur sint occaecat </p>
+      </div>
+      <div class="col-lg-10 mx-auto">
+        <div class="row justify-content-center">
+          <!-- pricing table -->
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="rounded text-center pricing-table table-1">
+              <h3>Free</h3>
+              <h1><span>$</span>00</h1>
+              <p>Far far away, behind the
+                wordmountains, far from the
+                countries Vokalia and
+              </p>
+              <a href="#" class="btn pricing-btn px-2">Get Started</a>
+            </div>
+          </div>
+          <!-- pricing table -->
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="rounded text-center pricing-table table-2">
+              <h3>Standard</h3>
+              <h1><span>$</span>75</h1>
+              <p>Far far away, behind the
+                wordmountains, far from the
+                countries Vokalia and
+              </p>
+              <a href="#" class="btn pricing-btn px-2">Buy Now</a>
+            </div>
+          </div>
+          <!-- pricing table -->
+          <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
+            <div class="rounded text-center pricing-table table-3">
+              <h3>Premium</h3>
+              <h1><span>$</span>99</h1>
+              <p>Far far away, behind the
+                wordmountains, far from the
+                countries Vokalia and
+              </p>
+              <a href="#" class="btn pricing-btn px-2">Buy Now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- background shapes -->
+  <img class="pricing-bg-shape-1 up-down-animation" src="images/background-shape/seo-ball-1.png" alt="background-shape">
+  <img class="pricing-bg-shape-2 up-down-animation" src="images/background-shape/seo-half-cycle.png" alt="background-shape">
+  <img class="pricing-bg-shape-3 left-right-animation" src="images/background-shape/team-bg-triangle.png" alt="background-shape">
+</section>
+<!-- /pricing -->
+
+<!-- client logo slider -->
+<section class="section">
+  <div class="container">
+      <div class="client-logo-slider align-self-center">
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-1.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-2.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-3.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-4.png" alt="client-logo"></a>
+          <a href="#" class="text-center d-block outline-0 p-5"><img class="d-unset img-fluid" src="images/clients-logo/client-logo-5.png" alt="client-logo"></a>
+      </div>
+  </div>
+</section>
+<!-- /client logo slider -->
+
+<!-- newsletter -->
+<section class="newsletter">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2>Subscribe to our newsletter</h2>
+        <p class="mb-5">Receive updates, news and deals</p>
+      </div>
+      <div class="col-lg-8 col-sm-10 col-12 mx-auto">
+        <form action="#">
+          <div class="input-wrapper position-relative">
+            <input type="email" class="newsletter-form" id="newsletter" placeholder="Enter your email">
+            <button type="submit" value="send" class="btn newsletter-btn">subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- background shapes -->
+  <img class="newsletter-bg-shape left-right-animation" src="images/background-shape/seo-ball-2.png" alt="background-shape">
+</section>
+<!-- /newsletter -->
+
+<!-- footer -->
+<footer class="footer-section footer" style="background-image: url(images/backgrounds/footer-bg.png);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center text-lg-left mb-4 mb-lg-0">
+        <!-- logo -->
+        <a href="index.html">
+          <img class="img-fluid" src="images/logo.png" alt="logo">
+        </a>
+      </div>
+      <!-- footer menu -->
+      <nav class="col-lg-8 align-self-center mb-5">
+        <ul class="list-inline text-lg-right text-center footer-menu">
+          <li class="list-inline-item active"><a href="index.html">Home</a></li>
+          <li class="list-inline-item"><a class="page-scroll" href="#fitur">Fitur</a></li>
+          <li class="list-inline-item"><a class="page-scroll" href="#bidang">Bidang</a></li>
+          <li class="list-inline-item"><a href="panduan.html">Panduan</a></li>
+          <li class="list-inline-item"><a class="page-scroll" href="#faqs">FAQs</a></li>
+          <li class="list-inline-item"><a href="contact.html">Kontak</a></li>
+        </ul>
+      </nav>
+      <!-- footer social icon -->
+      <nav class="col-12">
+        <ul class="list-inline text-lg-right text-center social-icon">
+          <li class="list-inline-item">
+            <a class="facebook" href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="twitter" href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="linkedin" href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="black" href="#"><i class="ti-github"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+
+<script src="plugins/bootstrap/popper.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- venobox -->
+<script src="plugins/Venobox/venobox.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- Main Script -->
+<script src="js/script.js"></script>
+<script>
+  // Efek ketik huruf satu per satu
+  const text = "Loading...";
+  let index = 0;
+  const speed = 120;
+
+  function typeWriter() {
+    if (index < text.length) {
+      document.getElementById("loadingText").innerHTML += text.charAt(index);
+      index++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  typeWriter();
+
+  // Fade out preloader
+  window.addEventListener("load", function() {
+    const loader = document.getElementById("preloader");
+
+    // waktu tampil preloader sebelum menghilang
+    setTimeout(() => {
+      loader.classList.add("fade-out");
+
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 600);
+      
+    }, 2000);
+  });
+</script>
+
+<!-- Modal Register -->
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="registerModalLabel">Daftar Akun Baru</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form>
+
+          <div class="mb-3">
+            <label class="form-label">Nama Lengkap</label>
+            <input type="text" class="form-control" placeholder="Masukkan nama lengkap" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Masukkan email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Masukkan password" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Jurusan</label>
+            <select class="form-control" required>
+              <option value="">Pilih Jurusan</option>
+              <option>Teknik Informatika</option>
+              <option>Kimia</option>
+              <option>Biologi</option>
+              <option>Fisika</option>
+              <option>Farmasi</option>
+              <option>Kesehatan</option>
+              <option>Teknik Industri</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2">
+            Daftar
+          </button>
+
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <p class="text-center w-100 mb-0">
+          Sudah punya akun? 
+          <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Login</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal Login -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Login Akun</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="loginForm">
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="email" class="form-control" placeholder="Masukkan email" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="Masukkan password" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2" id="loginBtn">
+  <span id="loginText">Login</span>
+</button>
+
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <p class="text-center w-100 mb-0">
+          Belum punya akun?
+          <a href="#" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">Daftar</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Lupa Password --> 
+<div class="modal fade" id="forgotModal" tabindex="-1" role="dialog" aria-labelledby="forgotModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="forgotModalLabel">Lupa Password</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <!-- Alert sukses -->
+        <div id="forgotSuccess" class="alert alert-success d-none" role="alert">
+          Permintaan reset password telah dikirim.<br>
+          Silakan cek email Anda.
+        </div>
+
+        <form>
+          <div class="mb-3">
+            <label class="form-label">Email Terdaftar</label>
+            <input type="email" class="form-control" placeholder="Masukkan email anda" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100 py-2">
+            Reset Password
+          </button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <p class="text-center w-100 mb-0">
+          Ingat password? 
+          <a href="#" data-toggle="modal" data-target="#loginModal" data-dismiss="modal">Login</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  const originalTitle = document.title;
+  let dotCount = 0;
+  let loadingInterval;
+
+  document.getElementById("loginForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const btn = document.getElementById("loginBtn");
+    const text = document.getElementById("loginText");
+
+    btn.disabled = true;
+
+    loadingInterval = setInterval(() => {
+      dotCount = (dotCount + 1) % 4; // 0–3
+      const dots = ".".repeat(dotCount);
+      text.textContent = "Loading" + dots;
+      document.title = "Loading" + dots;
+    }, 500);
+
+    // simulasi proses login
+    setTimeout(() => {
+      clearInterval(loadingInterval);
+      document.title = originalTitle;
+      window.location.href = "dashboard.html";
+    }, 2000);
+  });
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const formForgot = document.querySelector("#forgotModal form");
+  const alertBox = document.getElementById("forgotSuccess");
+
+  formForgot.addEventListener("submit", function (e) {
+    e.preventDefault();
+    alertBox.classList.remove("d-none");
+    formForgot.reset();
+  });
+
+  // Hapus alert saat modal ditutup
+  $('#forgotModal').on('hidden.bs.modal', function () {
+    alertBox.classList.add("d-none");
+    formForgot.reset();
+  });
+});
+</script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  const target = params.get("scroll");
+
+  if (target) {
+    const el = document.getElementById(target);
+    if (el) {
+      // delay biar layout & gambar keload dulu
+      setTimeout(() => {
+        el.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }, 300);
+    }
+  }
+});
+</script>
+
+
+<script>
+document.querySelectorAll(".faq-question").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const item = btn.parentElement;
+
+    // tutup FAQ lain (opsional, biar satu aja kebuka)
+    document.querySelectorAll(".faq-item").forEach(faq => {
+      if (faq !== item) faq.classList.remove("active");
+    });
+
+    item.classList.toggle("active");
+  });
+});
+</script>
+
+</body>
+</html>

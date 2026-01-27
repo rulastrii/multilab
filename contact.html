@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiLab – Virtual Learning Simulator</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+<!-- Pastikan Font Awesome sudah dimuat di <head> -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="plugins/Venobox/venobox.css">
+  <!-- aos -->
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+</head>
+
+<body>
+  
+
+<!-- navigation -->
+<section class="fixed-top navigation">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- navbar -->
+      <div class="collapse navbar-collapse text-center" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=fitur">Fitur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=bidang">Bidang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="panduan.html">Panduan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=faqs">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Kontak</a>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary ml-lg-3 primary-shadow">Try Demo</a>
+      </div>
+    </nav>
+  </div>
+</section>
+<!-- /navigation -->
+
+<!-- contact -->
+<section class="section-lg contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-title">Kontak Virtual Lab MultiLab</h2>
+                <p>Hubungi tim MultiLab untuk pertanyaan terkait eksperimen virtual, dukungan teknis, atau informasi platform.</p>
+            </div>
+        </div>
+
+        <div class="row contact-bg p-5 rounded mb-5">
+            <!-- Alert dan Form Kontak -->
+<div class="col-lg-7 mb-4 mb-lg-0">
+  <form id="contactForm">
+    <input type="text" class="form-control mb-3" id="name" name="name" placeholder="Nama Anda" required>
+    <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Email Anda" required>
+    <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="Subjek" required>
+    <textarea name="message" id="message" class="form-control mb-3" placeholder="Pesan Anda" required></textarea>
+    
+    <button type="submit" class="btn btn-secondary btn-block position-relative">
+      <span id="sendText">Kirim Pesan</span>
+    </button>
+  </form>
+</div>
+
+
+            <div class="col-lg-5">
+                <p class="mb-4">Tim Virtual Lab MultiLab siap membantu Anda 24/7 untuk pertanyaan teknis, dukungan praktikum, atau informasi platform.</p>
+                <a href="tel:+622112345678" class="text-color h5 d-block">+62 21 1234 5678</a>
+                <a href="mailto:info@multilab.id" class="mb-4 text-color h5 d-block">info@multilab.id</a>
+                <p>Gedung MultiLab<br>Jl. Ilmu Pengetahuan No. 10<br>Jakarta, Indonesia</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0 d-flex">
+                <div class="card p-4 border-blue h-100">
+                    <h5><i class="fas fa-handshake round-icon blue mr-2"></i> Sales</h5>
+                    <p class="mb-0">Pertanyaan terkait paket lab virtual, langganan, dan kerjasama institusi.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0 d-flex">
+                <div class="card p-4 border-blue h-100">
+                    <h5><i class="fas fa-headset round-icon green mr-2"></i> Help & Support</h5>
+                    <p class="mb-0">Dukungan teknis, panduan praktikum, dan troubleshooting platform MultiLab.</p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6 mb-4 mb-lg-0 d-flex">
+                <div class="card p-4 border-blue h-100">
+                    <h5><i class="fas fa-gavel round-icon orange mr-2"></i> Legal</h5>
+                    <p class="mb-0">Informasi terkait kebijakan penggunaan, hak cipta, dan aturan lab virtual.</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- background shapes -->
+    <img class="contact-bg-1 up-down-animation" src="images/background-shape/feature-bg-2.png" alt="background-shape">
+    <img class="contact-bg-2 left-right-animation" src="images/background-shape/green-half-cycle.png" alt="background-shape">
+    <img class="contact-bg-3 up-down-animation" src="images/background-shape/green-dot.png" alt="background-shape">
+    <img class="contact-bg-4 left-right-animation" src="images/background-shape/service-half-cycle.png" alt="background-shape">
+    <img class="contact-bg-5 up-down-animation" src="images/background-shape/feature-bg-2.png" alt="background-shape">
+</section>
+
+<!-- /contact -->
+
+<!-- footer -->
+<footer class="footer-section footer" style="background-image: url(images/backgrounds/footer-bg.png);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center text-lg-left mb-4 mb-lg-0">
+        <!-- logo -->
+        <a href="index.html">
+          <img class="img-fluid" src="images/logo.png" alt="logo">
+        </a>
+      </div>
+      <!-- footer menu -->
+      <nav class="col-lg-8 align-self-center mb-5">
+        <ul class="list-inline text-lg-right text-center footer-menu">
+          <li class="list-inline-item"><a href="index.html">Home</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=fitur">Fitur</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=bidang">Bidang</a></li>
+          <li class="list-inline-item"><a href="panduan.html">Panduan</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=faqs">FAQs</a></li>
+          <li class="list-inline-item active"><a href="contact.html">Kontak</a></li>
+        </ul>
+
+      </nav>
+      <!-- footer social icon -->
+      <nav class="col-12">
+        <ul class="list-inline text-lg-right text-center social-icon">
+          <li class="list-inline-item">
+            <a class="facebook" href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="twitter" href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="linkedin" href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="black" href="#"><i class="ti-github"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- venobox -->
+<script src="plugins/Venobox/venobox.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- Main Script -->
+<script src="js/script.js"></script>
+
+<!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const sendBtn = form.querySelector("button");
+  const sendText = document.getElementById("sendText");
+
+  form.addEventListener("submit", e => {
+    e.preventDefault();
+
+    // Disable button & mulai animasi titik
+    sendBtn.disabled = true;
+    let dots = 0;
+    sendText.textContent = "Kirim Pesan";
+
+    const loading = setInterval(() => {
+      dots = (dots + 1) % 4;
+      sendText.textContent = "Kirim Pesan" + ".".repeat(dots);
+    }, 500);
+
+    // Simulasi proses 2 detik
+    setTimeout(() => {
+      clearInterval(loading);
+      sendBtn.disabled = false;
+      sendText.textContent = "Kirim Pesan";
+
+      // Reset form
+      form.reset();
+
+      // Alert sukses dengan SweetAlert2
+      Swal.fire({
+        icon: 'success',
+        title: 'Berhasil!',
+        text: 'Pesan Anda telah dikirim',
+        timer: 2000,
+        showConfirmButton: false
+      });
+
+    }, 2000);
+  });
+});
+</script>
+</body>
+</html>

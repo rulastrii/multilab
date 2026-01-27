@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiLab – Virtual Learning Simulator</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- slick slider -->
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="plugins/Venobox/venobox.css">
+  <!-- aos -->
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    /* Animasi hover card panduan */
+.guide-card {
+  transition: 
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+  cursor: pointer;
+}
+
+.guide-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* efek icon ikut hidup */
+.guide-card i {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.guide-card:hover i {
+  transform: scale(1.15);
+}
+
+  </style>
+</head>
+
+<body>
+  
+
+<!-- navigation -->
+<section class="fixed-top navigation">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="index.html"><img src="images/logo.png" alt="logo"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- navbar -->
+      <div class="collapse navbar-collapse text-center" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=fitur">Fitur</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=bidang">Bidang</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="panduan.html">Panduan</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html?scroll=faqs">FAQs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">Kontak</a>
+          </li>
+        </ul>
+        <a href="#" class="btn btn-primary ml-lg-3 primary-shadow">Try Demo</a>
+      </div>
+    </nav>
+  </div>
+</section>
+<!-- /navigation -->
+
+<!-- service -->
+<section class="section-lg service-bg-image position-relative" id="panduan"
+  style="background-image: url(images/backgrounds/service-page.png);"> 
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <h2 class="section-title">Panduan Penggunaan</h2>
+        <p class="mb-100">
+          Pelajari cara menggunakan platform Virtual Lab MultiLab secara mudah dan interaktif.<br>
+          Ikuti panduan berikut sebelum memulai eksperimen dan game edukasi.
+        </p>
+      </div>
+
+      <!-- Panduan 1 -->
+      <div class="col-sm-6 mb-4">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-hand-pointer round-icon blue mb-4"></i>
+          <h4>Drag & Drop Komponen</h4>
+          <p>
+            Gunakan fitur drag & drop untuk menyusun alat dan bahan eksperimen
+            langsung di area laboratorium virtual secara intuitif.
+          </p>
+        </div>
+      </div>
+
+      <!-- Panduan 2 -->
+      <div class="col-sm-6 mb-4 translate-y-150">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-play-circle round-icon green mb-4"></i>
+          <h4>Menjalankan Eksperimen</h4>
+          <p>
+            Jalankan simulasi eksperimen dan amati hasilnya secara real-time
+            sesuai langkah praktikum yang tersedia.
+          </p>
+        </div>
+      </div>
+
+      <!-- Panduan 3 -->
+      <div class="col-sm-6 mb-4">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-file-download round-icon orange mb-4"></i>
+          <h4>Simpan & Unduh Hasil</h4>
+          <p>
+            Simpan hasil eksperimen secara otomatis, unduh laporan dalam format
+            PDF, atau bagikan hasil eksperimen ke dosen dan teman.
+          </p>
+        </div>
+      </div>
+
+      <!-- Panduan 4 -->
+      <div class="col-sm-6 mb-4 translate-y-150">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-gamepad round-icon blue mb-4"></i>
+          <h4>Tips & Trik Game Edukasi</h4>
+          <p>
+            Pelajari strategi dan tips untuk menyelesaikan game edukasi
+            berbasis eksperimen guna meningkatkan pemahaman konsep.
+          </p>
+        </div>
+      </div>
+
+      <!-- Panduan 5 -->
+      <div class="col-sm-6 mb-4">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-video round-icon green mb-4"></i>
+          <h4>Video Tutorial</h4>
+          <p>
+            Akses video tutorial langkah demi langkah untuk setiap fitur
+            dan eksperimen yang tersedia di MultiLab.
+          </p>
+        </div>
+      </div>
+
+      <!-- Panduan 6 -->
+      <div class="col-sm-6 mb-4 translate-y-150">
+        <div class="rounded bg-white p-4 shadow-primary h-100 guide-card">
+          <i class="fas fa-book round-icon orange mb-4"></i>
+          <h4>PDF Panduan</h4>
+          <p>
+            Unduh panduan lengkap dalam bentuk PDF sebagai referensi cepat
+            saat menggunakan Virtual Lab kapan saja.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- background shapes -->
+  <img class="service-bg-1 up-down-animation" src="images/background-shape/feature-bg-2.png" alt="">
+  <img class="service-bg-2 left-right-animation" src="images/background-shape/seo-half-cycle.png" alt="">
+  <img class="service-bg-3 up-down-animation" src="images/background-shape/team-bg-triangle.png" alt="">
+  <img class="service-bg-4 left-right-animation" src="images/background-shape/green-dot.png" alt="">
+  <img class="service-bg-5 up-down-animation" src="images/background-shape/team-bg-triangle.png" alt="">
+</section>
+
+<!-- /service -->
+
+<!-- footer -->
+<footer class="footer-section footer" style="background-image: url(images/backgrounds/footer-bg.png);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center text-lg-left mb-4 mb-lg-0">
+        <!-- logo -->
+        <a href="index.html">
+          <img class="img-fluid" src="images/logo.png" alt="logo">
+        </a>
+      </div>
+      <!-- footer menu -->
+      <nav class="col-lg-8 align-self-center mb-5">
+        <ul class="list-inline text-lg-right text-center footer-menu">
+          <li class="list-inline-item"><a href="index.html">Home</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=fitur">Fitur</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=bidang">Bidang</a></li>
+          <li class="list-inline-item"><a href="panduan.html">Panduan</a></li>
+          <li class="list-inline-item"><a href="index.html?scroll=faqs">FAQs</a></li>
+          <li class="list-inline-item active"><a href="contact.html">Kontak</a></li>
+        </ul>
+      </nav>
+      <!-- footer social icon -->
+      <nav class="col-12">
+        <ul class="list-inline text-lg-right text-center social-icon">
+          <li class="list-inline-item">
+            <a class="facebook" href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="twitter" href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="linkedin" href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="black" href="#"><i class="ti-github"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- venobox -->
+<script src="plugins/Venobox/venobox.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- Main Script -->
+<script src="js/script.js"></script>
+
+</body>
+</html>

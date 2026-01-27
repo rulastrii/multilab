@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+  <meta charset="utf-8">
+  <title>MultiLab – Virtual Learning Simulator</title>
+
+  <!-- mobile responsive meta -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <!-- ** Plugins Needed for the Project ** -->
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="plugins/bootstrap/bootstrap.min.css">
+  <!-- themefy-icon -->
+  <link rel="stylesheet" href="plugins/themify-icons/themify-icons.css">
+  <!-- slick slider -->
+  <link rel="stylesheet" href="plugins/slick/slick.css">
+  <!-- venobox popup -->
+  <link rel="stylesheet" href="plugins/Venobox/venobox.css">
+  <!-- aos -->
+  <link rel="stylesheet" href="plugins/aos/aos.css">
+
+  <!-- Main Stylesheet -->
+  <link href="css/style.css" rel="stylesheet">
+  
+  <!--Favicon-->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+
+  <style>
+    .lab-card {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.lab-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.lab-card ul {
+  list-style: none;
+  font-size: 14px;
+}
+
+  </style>
+</head>
+
+<body>
+  
+
+
+<!-- navigation -->
+<section class="fixed-top navigation">
+  <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="dashboard.html"><img src="images/logo.png" alt="logo"></a>
+      <button class="navbar-toggler border-0" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- navbar -->
+      <div class="collapse navbar-collapse text-center" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item"><a class="nav-link" href="dashboard.html">Home</a></li>
+          <!-- Menu khusus user / fitur interaktif -->
+          <li class="nav-item"><a class="nav-link" href="lab.html">Lab Eksperimen</a></li>
+          <li class="nav-item"><a class="nav-link" href="game.html">Game Edukasi</a></li>
+        </ul>
+
+        <div class="dropdown ml-lg-3">
+  <a href="#" class="d-flex align-items-center dropdown-toggle" id="userDropdown" data-toggle="dropdown">
+    <img src="assets/img/user.jpg" alt="User"
+         class="rounded-circle"
+         width="40" height="40">
+  </a>
+
+  <div class="dropdown-menu dropdown-menu-right">
+    <a class="dropdown-item" href="profile.html">Profile</a>
+    <a class="dropdown-item" href="#">Eksperimen Saya</a>
+    <a class="dropdown-item" href="#">Game Progress</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item text-danger" href="#" id="logoutBtn">Logout</a>
+  </div>
+</div>
+
+      </div>
+    </nav>
+  </div>
+</section>
+<!-- /navigation -->
+
+<!-- about us -->
+<section class="section-lg about pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h2 class="section-title">Lab Eksperimen</h2>
+      </div>
+
+      <div class="col-lg-12 mb-100">
+        <p>
+          <strong>Lab Eksperimen</strong> adalah fitur utama MultiLab yang
+          memungkinkan pengguna melakukan praktikum virtual secara interaktif
+          melalui sistem <em>drag & drop</em> dan simulasi real-time.
+        </p>
+
+        <p>
+          Setiap eksperimen dirancang menyerupai kondisi laboratorium nyata,
+          sehingga mahasiswa dapat memahami konsep secara visual, aman,
+          dan efisien tanpa keterbatasan alat fisik.
+        </p>
+      </div>
+
+      <div class="col-lg-12">
+        <div class="about-video">
+          <img class="img-fluid w-100" src="images/dashboard/lab-preview.png" alt="Lab Eksperimen">
+          <a class="venobox play-btn" href="https://www.youtube.com/embed/VIDEO_ID" data-vbtype="iframe">
+            <i class="ti-control-play"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- /about us -->
+
+<!-- product -->
+<section class="section product" style="background-image: url(images/backgrounds/about-bg.png);">
+  <div class="container">
+    <div class="row justify-content-center">
+
+      <div class="col-lg-12 text-center">
+        <h2 class="section-title">Pilihan Lab Eksperimen</h2>
+        <p class="mb-100">
+          Pilih laboratorium sesuai jurusan dan jalankan eksperimen
+          secara interaktif.
+        </p>
+      </div>
+
+      <!-- KIMIA -->
+<div class="col-md-4 col-sm-6 mb-50">
+  <div class="card p-4 h-100 shadow-primary text-center lab-card">
+    
+    <div class="mb-3">
+      <i class="fas fa-flask fa-3x text-purple"></i>
+    </div>
+
+    <h4>Lab Kimia</h4>
+    <p class="mb-3">
+      Lakukan praktikum kimia secara virtual mulai dari
+      reaksi larutan hingga distilasi.
+    </p>
+
+    <ul class="pl-0 mb-4 text-left">
+      <li>🔹 Reaksi kimia & uji pH</li>
+      <li>🔹 Drag & drop alat lab</li>
+      <li>🔹 Output video & grafik</li>
+    </ul>
+
+    <a href="lab-kimia.html" class="btn btn-primary btn-block">
+      <i class="fas fa-play mr-2"></i> Mulai Eksperimen
+    </a>
+
+  </div>
+</div>
+
+<!-- SAINS -->
+<div class="col-md-4 col-sm-6 mb-50">
+  <div class="card p-4 h-100 shadow-primary text-center lab-card">
+
+    <div class="mb-3">
+      <i class="fas fa-atom fa-3x text-purple"></i>
+    </div>
+
+    <h4>Lab Sains</h4>
+    <p class="mb-3">
+      Eksplorasi konsep fisika dan biologi melalui
+      simulasi interaktif.
+    </p>
+
+    <ul class="pl-0 mb-4 text-left">
+      <li>🔹 Mekanika & listrik-magnet</li>
+      <li>🔹 Sensor & alat ukur virtual</li>
+      <li>🔹 Grafik & animasi hasil</li>
+    </ul>
+
+    <a href="lab-sains.html" class="btn btn-primary btn-block">
+      <i class="fas fa-play mr-2"></i> Mulai Eksperimen
+    </a>
+
+  </div>
+</div>
+
+<!-- TEKNIK -->
+<div class="col-md-4 col-sm-6 mb-50">
+  <div class="card p-4 h-100 shadow-primary text-center lab-card">
+
+    <div class="mb-3">
+      <i class="fas fa-cogs fa-3x text-purple"></i>
+    </div>
+
+    <h4>Lab Teknik</h4>
+    <p class="mb-3">
+      Bangun dan uji sistem teknik seperti robotik
+      dan rangkaian listrik.
+    </p>
+
+    <ul class="pl-0 mb-4 text-left">
+      <li>🔹 Robotik & mekatronika</li>
+      <li>🔹 Rangkaian & controller</li>
+      <li>🔹 Simulasi performa</li>
+    </ul>
+
+    <a href="lab-teknik.html" class="btn btn-primary btn-block">
+      <i class="fas fa-play mr-2"></i> Mulai Eksperimen
+    </a>
+
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+
+  <!-- our vision -->
+<section class="section">
+  <div class="container">
+    <div class="row align-items-center">
+
+      <div class="col-md-6">
+        <h2 class="section-title">Fitur Tambahan Eksperimen</h2>
+        <ul class="pl-3">
+          <li>Undo / Redo saat menyusun komponen</li>
+          <li>Simulasi real-time saat objek diinteraksi</li>
+          <li>Simpan eksperimen sebagai video atau GIF</li>
+          <li>Screenshot grafik & hasil simulasi</li>
+          <li>Share eksperimen ke teman atau platform edukasi</li>
+        </ul>
+      </div>
+
+      <div class="col-md-6">
+        <img src="images/dashboard/features.png" alt="Fitur Eksperimen" class="img-fluid w-100">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- /our vision -->
+
+</section>
+<!-- /product -->
+
+
+
+<!-- footer -->
+<footer class="footer-section footer" style="background-image: url(images/backgrounds/footer-bg.png);">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4 text-center text-lg-left mb-4 mb-lg-0">
+        <!-- logo -->
+        <a href="index.html">
+          <img class="img-fluid" src="images/logo.png" alt="logo">
+        </a>
+      </div>
+      <!-- footer menu -->
+      <nav class="col-lg-8 align-self-center mb-5">
+        <ul class="list-inline text-lg-right text-center footer-menu">
+          <li class="list-inline-item active"><a href="index.html">Home</a></li>
+          <!-- Menu khusus user / fitur interaktif -->
+          <li class="list-inline-item"><a class="nav-link" href="lab.html">Lab Eksperimen</a></li>
+          <li class="list-inline-item"><a class="nav-link" href="game.html">Game Edukasi</a></li>
+        
+        </ul>
+      </nav>
+      <!-- footer social icon -->
+      <nav class="col-12">
+        <ul class="list-inline text-lg-right text-center social-icon">
+          <li class="list-inline-item">
+            <a class="facebook" href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="twitter" href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="linkedin" href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a class="black" href="#"><i class="ti-github"></i></a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+<!-- /footer -->
+
+<!-- jQuery -->
+<script src="plugins/jQuery/jquery.min.js"></script>
+<!-- Bootstrap JS -->
+<script src="plugins/bootstrap/bootstrap.min.js"></script>
+<!-- slick slider -->
+<script src="plugins/slick/slick.min.js"></script>
+<!-- venobox -->
+<script src="plugins/Venobox/venobox.min.js"></script>
+<!-- aos -->
+<script src="plugins/aos/aos.js"></script>
+<!-- Main Script -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
