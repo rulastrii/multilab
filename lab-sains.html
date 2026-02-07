@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Virtual Lab Kimia – Uji Asam Basa</title>
+<title>Virtual Lab Sains – Eksperimen Interaktif</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -69,7 +69,7 @@ body { background:#f6f8fb; font-family:Segoe UI; }
   flex: 1;
   padding: 20px;
   min-height: calc(100vh - 70px);
-  background: url('assets/img/bg-kimia.png') no-repeat center center;
+  background: url('assets/img/bg-sains.jpg') no-repeat center center;
   background-size: cover;
   position: relative;
 }
@@ -203,6 +203,78 @@ body { background:#f6f8fb; font-family:Segoe UI; }
   margin-right: 6px;
 }
 
+
+/* AIR PANAS MENGALIR */
+@keyframes pourWater {
+  from { height: 0%; }
+  to { height: 45%; }
+}
+
+/* UAP AIR NAIK */
+.steam {
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 22px;
+  opacity: 0;
+  animation: steamUp 2s infinite;
+}
+
+@keyframes steamUp {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px);
+  }
+  50% {
+    opacity: .7;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -40px);
+  }
+}
+
+/* ES BATU */
+.ice {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 30px;
+  animation: dropIce .5s ease-out;
+}
+
+@keyframes dropIce {
+  from { transform: translate(-50%, -40px); }
+  to { transform: translate(-50%, 0); }
+}
+
+/* AWAN TERBENTUK BERTAHAP */
+.cloud {
+  position: absolute;
+  top: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  opacity: 0;
+  animation: cloudGrow 3s forwards;
+}
+
+@keyframes cloudGrow {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 10px) scale(.5);
+  }
+  50% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 1;
+    transform: translate(-50%, 0) scale(1.2);
+  }
+}
+
 </style>
 </head>
 
@@ -210,7 +282,7 @@ body { background:#f6f8fb; font-family:Segoe UI; }
 
 <div class="header header-purple-pink d-flex align-items-center justify-content-between">
   <h5 class="text-white mb-0">
-    <i class="fa fa-flask"></i> Virtual Lab Kimia – Uji Asam Basa
+    <i class="fa fa-cloud"></i> Virtual Lab Sains – Awan dalam Gelas
   </h5>
 
 <div class="d-flex align-items-center mt-2 stage-card">
@@ -231,25 +303,25 @@ body { background:#f6f8fb; font-family:Segoe UI; }
 <div class="main">
 <!-- RAK -->
 <div class="rack">
-  <h6>Rak Alat & Bahan</h6>
+  <h6>Rak Alat Eksperimen</h6>
 
   <div class="rack-tools">
-    <div class="tool" draggable="true" data-item="glass">
-      <i class="fas fa-vial"></i> Gelas Kimia
-    </div>
-    <div class="tool" draggable="true" data-item="acid">
-      <i class="fas fa-flask"></i> Asam (HCl)
-    </div>
-    <div class="tool" draggable="true" data-item="base">
-      <i class="fas fa-flask"></i> Basa (NaOH)
-    </div>
-    <div class="tool" draggable="true" data-item="pipet">
-      <i class="fas fa-grip-lines-vertical"></i> Pipet
-    </div>
-    <div class="tool" draggable="true" data-item="lakmus">
-      <i class="fas fa-sticky-note"></i> Lakmus
-    </div>
+  <div class="tool" draggable="true" data-item="glass">
+    <i class="fas fa-vial"></i> Gelas Kaca
   </div>
+
+  <div class="tool" draggable="true" data-item="hot-water">
+    <i class="fas fa-water"></i> Air Panas
+  </div>
+
+  <div class="tool" draggable="true" data-item="ice">
+    <i class="fas fa-snowflake"></i> Es Batu
+  </div>
+
+  <div class="tool" draggable="true" data-item="spray">
+    <i class="fas fa-spray-can"></i> Semprotan Air
+  </div>
+</div>
 
   <!-- Tombol Kembali -->
   <button class="btn btn-purple-pink btn-sm btn-block mt-auto" onclick="goBack()">
@@ -270,7 +342,7 @@ body { background:#f6f8fb; font-family:Segoe UI; }
 </div>
 
 <div class="card-box">
-<b id="instruction">Tahap 1: Seret gelas kimia</b>
+  <b id="instruction">Tahap 1: Seret gelas ke meja eksperimen</b>
 </div>
 
 <div class="card-box d-none" id="resultBox">
@@ -295,13 +367,12 @@ body { background:#f6f8fb; font-family:Segoe UI; }
 ===================== */
 let state = {
   glass: false,
-  liquid: false,
-  pipet: false,
-  stirred: false,
-  lakmus: false,
-  tested: false,
-  type: null
+  hotWater: false,
+  spray: false,
+  ice: false,
+  cloudFormed: false
 };
+
 
 /* =====================
    DRAG SOURCE (RAK)
@@ -322,7 +393,7 @@ table.addEventListener('drop', e => {
   e.preventDefault();
   const item = e.dataTransfer.getData('item');
 
-  /* ===== 1. GELAS ===== */
+  /* 1. GELAS */
   if (item === "glass" && !state.glass) {
     const glass = document.createElement('div');
     glass.className = 'glass';
@@ -331,144 +402,81 @@ table.addEventListener('drop', e => {
 
     state.glass = true;
     setStage(2);
-    instruction("Tahap 2: Seret larutan ke dalam gelas kimia");
+    instruction("Tahap 2: Seret air panas ke dalam gelas");
     return;
   }
 
-  /* ===== 2. LARUTAN ===== */
-  if ((item === "acid" || item === "base") && state.glass && !state.liquid) {
-    state.type = item;
+  /* 2. AIR PANAS */
+  if (item === "hot-water" && state.glass && !state.hotWater) {
+  const water = document.createElement('div');
+  water.className = 'liquid';
+  water.style.background = '#ffb703';
+  water.style.animation = 'pourWater 2s forwards';
 
-    const liquid = document.createElement('div');
-    liquid.className = 'liquid ' + item;
-    document.getElementById('glass').appendChild(liquid);
+  document.getElementById('glass').appendChild(water);
 
-    setTimeout(() => liquid.style.height = '65%', 100);
-
-    state.liquid = true;
-    setStage(3);
-    instruction("Tahap 3: Seret pipet ke meja, lalu ke gelas untuk mengaduk");
-    return;
-  }
-
-  /* ===== 3. PIPET KE MEJA ===== */
-  if (item === "pipet" && state.liquid && !state.pipet) {
-    const pipet = document.createElement('div');
-    pipet.className = 'pipet';
-    pipet.id = 'pipet';
-    pipet.draggable = true;
-
-    pipet.addEventListener('dragstart', ev => {
-      ev.dataTransfer.setData('item', 'pipet-stir');
-    });
-
-    table.appendChild(pipet);
-    state.pipet = true;
-    setStage(4);
-
-    instruction("Tahap 4: Seret pipet ke gelas untuk mengaduk larutan");
-    return;
-  }
-
-  /* ===== 4. PIPET KE GELAS (ADUK) ===== */
-  if (item === "pipet-stir" && state.pipet && !state.stirred) {
-    const glass = document.getElementById('glass');
-    glass.style.animation = "shake .4s linear 3";
-
-    state.stirred = true;
-    setStage(5);
-    instruction("Tahap 5: Larutan telah diaduk. Seret lakmus ke dalam gelas");
-    return;
-  }
-
-  /* ===== 5. LAKMUS KE GELAS ===== */
-  if (item === "lakmus" && state.stirred && !state.lakmus) {
-    const lakmus = document.createElement('div');
-    lakmus.className = 'lakmus';
-    lakmus.id = 'lakmus';
-    lakmus.innerText = 'Lakmus';
-    lakmus.draggable = true;
-
-    lakmus.addEventListener('dragstart', ev => {
-      ev.dataTransfer.setData('item', 'lakmus-test');
-    });
-
-    document.getElementById('glass').appendChild(lakmus);
-    state.lakmus = true;
-    setStage(6);
-
-    instruction("Tahap 6: Tarik lakmus ke meja untuk melihat hasil");
-    return;
-  }
-
-  /* ===== 6. LAKMUS KE MEJA (HASIL) ===== */
-  if (item === "lakmus-test" && state.lakmus && !state.tested) {
-    const lak = document.getElementById('lakmus');
-    table.appendChild(lak);
-
-    if (state.type === "acid") {
-  lak.style.background = "#dc3545";
-  lak.style.color = "#fff";
-
-  document.getElementById('resultText').innerHTML = `
-    <h6 class="text-danger mb-2">
-      <i class="fa fa-vial"></i> Hasil Pengujian
-    </h6>
-
-    <p>
-      <b>Larutan bersifat ASAM</b>
-    </p>
-
-    <ul class="mb-2">
-      <li>Larutan yang diuji adalah <b>HCl (asam klorida)</b></li>
-      <li>Asam melepaskan ion <b>H<sup>+</sup></b> di dalam air</li>
-      <li>Lakmus berubah warna menjadi <b>merah</b></li>
-    </ul>
-
-    <p class="mb-0">
-      <b>Kesimpulan:</b> Perubahan warna lakmus menunjukkan bahwa larutan
-      memiliki sifat asam.
-    </p>
-  `;
-} else {
-  lak.style.background = "#0d6efd";
-  lak.style.color = "#fff";
-
-  document.getElementById('resultText').innerHTML = `
-    <h6 class="text-primary mb-2">
-      <i class="fa fa-vial"></i> Hasil Pengujian
-    </h6>
-
-    <p>
-      <b>Larutan bersifat BASA</b>
-    </p>
-
-    <ul class="mb-2">
-      <li>Larutan yang diuji adalah <b>NaOH (natrium hidroksida)</b></li>
-      <li>Basa melepaskan ion <b>OH<sup>−</sup></b> di dalam air</li>
-      <li>Lakmus berubah warna menjadi <b>biru</b></li>
-    </ul>
-
-    <p class="mb-0">
-      <b>Kesimpulan:</b> Perubahan warna lakmus menunjukkan bahwa larutan
-      memiliki sifat basa.
-    </p>
-  `;
+  state.hotWater = true;
+  setStage(3);
+  instruction("Tahap 3: Air panas menghasilkan uap. Semprotkan air ke dalam gelas");
+  return;
 }
 
-document.getElementById('resultBox').classList.remove('d-none');
 
-/* GANTI EMOJI JADI ICON CEKLIS */
-instruction(`
-  <span class="text-success font-weight-bold">
-    <i class="fa fa-check-circle mr-1"></i>
-    Eksperimen selesai
-  </span>
-`);
+  /* 3. SEMPROT AIR */
+  if (item === "spray" && state.hotWater && !state.spray) {
+  const steam = document.createElement('div');
+  steam.className = 'steam';
+  steam.innerHTML = "💨 💨 💨";
 
-state.tested = true;
+  document.getElementById('glass').appendChild(steam);
 
-  }
+  state.spray = true;
+  setStage(4);
+  instruction("Tahap 4: Letakkan es di atas gelas untuk mendinginkan uap");
+  return;
+}
+
+
+  /* 4. ES BATU */
+  if (item === "ice" && state.spray && !state.cloudFormed) {
+  const ice = document.createElement('div');
+  ice.className = 'ice';
+  ice.innerHTML = "🧊";
+
+  document.getElementById('glass').appendChild(ice);
+
+  // awan muncul bertahap
+  setTimeout(() => {
+    const cloud = document.createElement('div');
+    cloud.className = 'cloud';
+    cloud.innerHTML = "☁️ ☁️ ☁️";
+
+    document.getElementById('glass').appendChild(cloud);
+  }, 800);
+
+  state.cloudFormed = true;
+  setStage(5);
+
+  document.getElementById('resultBox').classList.remove('d-none');
+  document.getElementById('resultText').innerHTML = `
+    <h6 class="text-primary">
+      <i class="fa fa-cloud"></i> Awan Terbentuk
+    </h6>
+    <p>
+      Uap air dari air panas naik ke atas, lalu mendingin karena es.
+      Pendinginan menyebabkan <b>kondensasi</b>, sehingga terbentuk awan kecil.
+    </p>
+    <p><b>Konsep Fisika:</b> Perubahan suhu & kondensasi</p>
+  `;
+
+  instruction(`
+    <span class="text-success font-weight-bold">
+      <i class="fa fa-check-circle"></i>
+      Eksperimen selesai
+    </span>
+  `);
+}
+
 });
 
 function setStage(n) {
@@ -512,7 +520,7 @@ function resetExperiment() {
 /* ===== KEMBALI KE MENU ===== */
 function goBack() {
   // halaman menu sebelumnya
-  window.location.href = 'beranda-kimia.html';
+  window.location.href = 'beranda-sains.html';
 }
 
 </script>
@@ -542,7 +550,7 @@ async function startRecord() {
 
     const a = document.createElement('a');
     a.href = url;
-    a.download = 'eksperimen-kimia.webm';
+    a.download = 'awan-dalam-gelas.webm';
     document.body.appendChild(a);
     a.click();
 
