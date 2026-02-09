@@ -2,55 +2,72 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Virtual Lab Kimia – Uji Asam Basa</title>
+<title>Virtual Lab Teknik – Uji Konduktivitas Listrik</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<!-- LIBRARY -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
 <style>
-body { background:#f6f8fb; font-family:Segoe UI; }
-
-.header {
-  background:#fff;
-  padding:15px 25px;
-  border-bottom:1px solid #eee;
-  display:flex;
-  justify-content:space-between;
+/* =====================
+   GLOBAL
+===================== */
+body {
+  background:#f6f8fb;
+  font-family: Segoe UI;
 }
 
-/* ===== HEADER GRADASI UNGU → PINK ===== */
+/* =====================
+   HEADER
+===================== */
 .header-purple-pink {
   background: linear-gradient(135deg, #6f42c1, #d63384);
-  border-bottom: none;
   padding: 15px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
 }
 
-.header-purple-pink h5 {
-  font-weight: 600;
-  letter-spacing: .3px;
+.stage-card { gap:24px; }
+
+.stage-badge,
+.btn-stage {
+  height:32px;
+  font-size:.85rem;
+  font-weight:600;
+  display:flex;
+  align-items:center;
+  border-radius:6px;
 }
 
-.header-purple-pink .badge {
-  color: #6f42c1;
-  font-weight: 600;
+.stage-badge {
+  border:1px solid #dee2e6;
+  color:#6f42c1;
 }
 
+.btn-stage {
+  border:1px solid #dee2e6;
+  background:#f8f9fa;
+  color:#6f42c1;
+}
+
+/* =====================
+   LAYOUT
+===================== */
 .main {
-  display: flex;
+  display:flex;
   min-height: calc(100vh - 70px);
 }
 
 /* RAK */
 .rack {
-  width: 300px;
-  background: #fff;
-  border-right: 1px solid #eee;
-  padding: 20px;
-
-  display: flex;
-  flex-direction: column;
-  min-height: calc(100vh - 70px);
+  width:300px;
+  background:#fff;
+  border-right:1px solid #eee;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
 }
 
 .tool {
@@ -60,21 +77,19 @@ body { background:#f6f8fb; font-family:Segoe UI; }
   margin-bottom:10px;
   cursor:grab;
   display:flex;
-  gap:10px;
   align-items:center;
+  gap:10px;
 }
 
-/* BACKGROUND LAB KIMIA */
+/* WORKSPACE */
 .workspace {
-  flex: 1;
-  padding: 20px;
-  min-height: calc(100vh - 70px);
-  background: url('assets/img/bg-teknik.jpg') no-repeat center center;
-  background-size: cover;
-  position: relative;
+  flex:1;
+  padding:20px;
+  background:url('assets/img/bg-teknik.jpg') no-repeat center;
+  background-size:cover;
 }
 
-
+/* CARD */
 .card-box {
   background:#fff;
   border-radius:12px;
@@ -88,478 +103,257 @@ body { background:#f6f8fb; font-family:Segoe UI; }
   border:2px dashed #ccc;
   border-radius:12px;
   display:flex;
-  align-items:flex-end;
   justify-content:center;
-  gap:30px;
+  align-items:flex-end;
   position:relative;
 }
 
-/* OBJECT */
-.glass {
-  width:90px;
-  height:160px;
-  border:3px solid #888;
-  border-radius:0 0 14px 14px;
+/* =====================
+   RANGKAIAN LISTRIK
+===================== */
+.board {
+  width:220px;
+  height:120px;
+  border:3px solid #555;
+  border-radius:10px;
+  background:#f8f9fa;
   position:relative;
-  overflow:hidden;
 }
 
-.liquid {
+/* ARUS LISTRIK */
+.wire {
   position:absolute;
-  bottom:0;
   width:100%;
-  height:0%;
-  transition:height 2s;
+  height:4px;
+  top:50%;
+  left:0;
+  opacity:0;
+  background: repeating-linear-gradient(
+    90deg,
+    #ffc107 0px,
+    #ffc107 10px,
+    transparent 10px,
+    transparent 20px
+  );
 }
 
-.acid { background:#dc3545; }
-.base { background:#0d6efd; }
-
-/* PIPET */
-.pipet {
-  width:12px;
-  height:140px;
-  border-radius:6px;
-  background:#adb5bd;
-  position:relative;
-}
-.pipet::after {
-  content:'';
-  position:absolute;
-  bottom:-20px;
-  left:50%;
-  transform:translateX(-50%);
-  width:6px;
-  height:20px;
-  background:#6c757d;
+.wire.active {
+  opacity:1;
+  animation: flow 1s linear infinite;
 }
 
-/* LAKMUS */
-.lakmus {
-  width:110px;
-  height:30px;
-  background:#eee;
-  border-radius:6px;
-  text-align:center;
-  line-height:30px;
-  font-weight:600;
-  transition:.6s;
+@keyframes flow {
+  from { background-position:0 0; }
+  to { background-position:40px 0; }
 }
 
-@keyframes shake {
-  0% { transform:rotate(0deg); }
-  25% { transform:rotate(2deg); }
-  50% { transform:rotate(-2deg); }
-  75% { transform:rotate(2deg); }
-  100% { transform:rotate(0deg); }
-}
-
-/* Tombol Rekam warna sama seperti badge Tahap */
-.stage-card {
-  gap: 24px; /* jarak antar card */
-}
-
-.stage-badge,
-.btn-stage {
-  padding: 6px 12px;
-  font-size: 0.85rem;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  border-radius: 6px;
-  font-weight: 600;
-}
-
-.stage-badge {
-  border: 1px solid #dee2e6;
-  color: #6f42c1; /* ungu */
-}
-
-.btn-stage {
-  border: 1px solid #dee2e6;
-  background: #f8f9fa;
-  color: #6f42c1;
-}
-
-.btn-stage:hover {
-  background: #f1f1f1;
-}
-
-
-/* ===== BUTTON GRADASI UNGU → PINK ===== */
+/* =====================
+   BUTTON
+===================== */
 .btn-purple-pink {
   background: linear-gradient(135deg, #6f42c1, #d63384);
-  color: #fff;
-  border: none;
-  font-weight: 600;
+  color:#fff;
+  border:none;
+  font-weight:600;
 }
 
 .btn-purple-pink:hover {
   background: linear-gradient(135deg, #5a34a3, #b82a6a);
-  color: #fff;
 }
-
-.btn-purple-pink i {
-  margin-right: 6px;
-}
-
 </style>
 </head>
 
 <body>
 
-<div class="header header-purple-pink d-flex align-items-center justify-content-between">
+<!-- HEADER -->
+<div class="header-purple-pink">
   <h5 class="text-white mb-0">
-    <i class="fa fa-flask"></i> Virtual Lab Kimia – Uji Asam Basa
+    <i class="fa fa-bolt"></i> Virtual Lab Teknik – Uji Konduktivitas Listrik
   </h5>
 
-<div class="d-flex align-items-center mt-2 stage-card">
-  <span class="badge badge-light stage-badge">
-    Tahap <span id="stage" class="ml-1">1</span>
-  </span>
-
-  <button class="btn btn-light btn-stage" onclick="startRecord()">
-    <i class="fa fa-video mr-1"></i> Rekam
-  </button>
+  <div class="d-flex stage-card">
+    <span class="badge badge-light stage-badge">
+      Tahap <span id="stage">1</span>
+    </span>
+    <button class="btn btn-light btn-stage" onclick="startRecord()">
+      <i class="fa fa-video mr-1"></i> Rekam
+    </button>
+  </div>
 </div>
-
-
-</div>
-
-
 
 <div class="main">
+
 <!-- RAK -->
 <div class="rack">
   <h6>Rak Alat & Bahan</h6>
 
-  <div class="rack-tools">
-    <div class="tool" draggable="true" data-item="glass">
-      <i class="fas fa-vial"></i> Gelas Kimia
-    </div>
-    <div class="tool" draggable="true" data-item="acid">
-      <i class="fas fa-flask"></i> Asam (HCl)
-    </div>
-    <div class="tool" draggable="true" data-item="base">
-      <i class="fas fa-flask"></i> Basa (NaOH)
-    </div>
-    <div class="tool" draggable="true" data-item="pipet">
-      <i class="fas fa-grip-lines-vertical"></i> Pipet
-    </div>
-    <div class="tool" draggable="true" data-item="lakmus">
-      <i class="fas fa-sticky-note"></i> Lakmus
-    </div>
+  <div class="tool" draggable="true" data-item="circuit">
+    <i class="fas fa-project-diagram"></i> Rangkaian
   </div>
 
-  <!-- Tombol Kembali -->
+  <div class="tool" draggable="true" data-item="battery">
+    <i class="fas fa-battery-full"></i> Baterai
+  </div>
+
+  <div class="tool" draggable="true" data-item="lamp">
+    <i class="fas fa-lightbulb"></i> Lampu
+  </div>
+
+  <hr>
+
+  <div class="tool" draggable="true" data-item="metal">
+    <i class="fas fa-cog"></i> Logam
+  </div>
+
+  <div class="tool" draggable="true" data-item="plastic">
+    <i class="fas fa-cube"></i> Plastik
+  </div>
+
   <button class="btn btn-purple-pink btn-sm btn-block mt-auto" onclick="goBack()">
     <i class="fa fa-arrow-left"></i> Kembali
   </button>
 </div>
 
-
-
-
-  
 <!-- WORKSPACE -->
 <div class="workspace">
 
-<div class="card-box">
-<h6>Meja Eksperimen</h6>
-<div class="table-area" id="table"></div>
-</div>
+  <div class="card-box">
+    <h6>Meja Eksperimen</h6>
+    <div class="table-area" id="table"></div>
+  </div>
 
-<div class="card-box">
-<b id="instruction">Tahap 1: Seret gelas kimia</b>
-</div>
+  <div class="card-box">
+    <b id="instruction">Tahap 1: Seret modul rangkaian ke area kerja</b>
+  </div>
 
-<div class="card-box d-none" id="resultBox">
-  <h6>Hasil</h6>
-  <p id="resultText"></p>
+  <div class="card-box d-none" id="resultBox">
+    <h6>Hasil Pengujian</h6>
 
-<button class="btn btn-purple-pink btn-sm" onclick="stopRecord()">
-  <i class="fa fa-download"></i> Unduh Video
-</button>
+    <table class="table table-sm table-bordered">
+      <thead class="thead-light">
+        <tr>
+          <th>Material</th>
+          <th>Sifat</th>
+          <th>Hasil</th>
+        </tr>
+      </thead>
+      <tbody id="resultTable"></tbody>
+    </table>
 
-<button class="btn btn-purple-pink btn-sm" onclick="resetExperiment()">
-  <i class="fa fa-refresh"></i> Ulangi
-</button>
-</div>
+    <button class="btn btn-purple-pink btn-sm" onclick="stopRecord()">
+      <i class="fa fa-download"></i> Unduh Video
+    </button>
+
+    <button class="btn btn-purple-pink btn-sm" onclick="resetExperiment()">
+      <i class="fa fa-refresh"></i> Ulangi
+    </button>
+  </div>
 
 </div>
 </div>
 
 <script>
 /* =====================
-   STATE PRAKTIKUM
+   STATE
 ===================== */
 let state = {
-  glass: false,
-  liquid: false,
-  pipet: false,
-  stirred: false,
-  lakmus: false,
-  tested: false,
-  type: null
+  circuit:false,
+  battery:false,
+  lamp:false,
+  tested:false
 };
 
-/* =====================
-   DRAG SOURCE (RAK)
-===================== */
-document.querySelectorAll('.tool').forEach(tool => {
-  tool.addEventListener('dragstart', e => {
-    e.dataTransfer.setData('item', tool.dataset.item);
+const table = document.getElementById('table');
+
+/* DRAG */
+document.querySelectorAll('.tool').forEach(t=>{
+  t.addEventListener('dragstart',e=>{
+    e.dataTransfer.setData('item',t.dataset.item);
   });
 });
 
-/* =====================
-   DROP AREA (MEJA)
-===================== */
-const table = document.getElementById('table');
-table.addEventListener('dragover', e => e.preventDefault());
-
-table.addEventListener('drop', e => {
+/* DROP */
+table.addEventListener('dragover',e=>e.preventDefault());
+table.addEventListener('drop',e=>{
   e.preventDefault();
   const item = e.dataTransfer.getData('item');
 
-  /* ===== 1. GELAS ===== */
-  if (item === "glass" && !state.glass) {
-    const glass = document.createElement('div');
-    glass.className = 'glass';
-    glass.id = 'glass';
-    table.appendChild(glass);
+  if(item==="circuit" && !state.circuit){
+    const board=document.createElement('div');
+    board.className='board';
+    board.id='board';
 
-    state.glass = true;
+    const wire=document.createElement('div');
+    wire.className='wire';
+    wire.id='wire';
+
+    board.appendChild(wire);
+    table.appendChild(board);
+
+    state.circuit=true;
     setStage(2);
-    instruction("Tahap 2: Seret larutan ke dalam gelas kimia");
-    return;
+    instruction("Tahap 2: Tambahkan baterai");
   }
 
-  /* ===== 2. LARUTAN ===== */
-  if ((item === "acid" || item === "base") && state.glass && !state.liquid) {
-    state.type = item;
-
-    const liquid = document.createElement('div');
-    liquid.className = 'liquid ' + item;
-    document.getElementById('glass').appendChild(liquid);
-
-    setTimeout(() => liquid.style.height = '65%', 100);
-
-    state.liquid = true;
+  if(item==="battery" && state.circuit && !state.battery){
+    state.battery=true;
     setStage(3);
-    instruction("Tahap 3: Seret pipet ke meja, lalu ke gelas untuk mengaduk");
-    return;
+    instruction("Tahap 3: Tambahkan lampu");
   }
 
-  /* ===== 3. PIPET KE MEJA ===== */
-  if (item === "pipet" && state.liquid && !state.pipet) {
-    const pipet = document.createElement('div');
-    pipet.className = 'pipet';
-    pipet.id = 'pipet';
-    pipet.draggable = true;
+  if(item==="lamp" && state.battery && !state.lamp){
+    const lamp=document.createElement('div');
+    lamp.id="lamp";
+    lamp.textContent="💡";
+    lamp.style.fontSize="40px";
+    lamp.style.opacity=".3";
+    document.getElementById('board').appendChild(lamp);
 
-    pipet.addEventListener('dragstart', ev => {
-      ev.dataTransfer.setData('item', 'pipet-stir');
-    });
-
-    table.appendChild(pipet);
-    state.pipet = true;
+    state.lamp=true;
     setStage(4);
-
-    instruction("Tahap 4: Seret pipet ke gelas untuk mengaduk larutan");
-    return;
+    instruction("Tahap 4: Uji material");
   }
 
-  /* ===== 4. PIPET KE GELAS (ADUK) ===== */
-  if (item === "pipet-stir" && state.pipet && !state.stirred) {
-    const glass = document.getElementById('glass');
-    glass.style.animation = "shake .4s linear 3";
+  if((item==="metal"||item==="plastic") && state.lamp && !state.tested){
+    const lamp=document.getElementById("lamp");
+    const wire=document.getElementById("wire");
 
-    state.stirred = true;
-    setStage(5);
-    instruction("Tahap 5: Larutan telah diaduk. Seret lakmus ke dalam gelas");
-    return;
-  }
+    if(item==="metal"){
+      lamp.style.opacity="1";
+      lamp.style.filter="drop-shadow(0 0 15px yellow)";
+      wire.classList.add("active");
+      addResult("Logam","Konduktor","Lampu menyala");
+    } else {
+      lamp.style.opacity=".2";
+      lamp.style.filter="none";
+      wire.classList.remove("active");
+      addResult("Plastik","Isolator","Lampu mati");
+    }
 
-  /* ===== 5. LAKMUS KE GELAS ===== */
-  if (item === "lakmus" && state.stirred && !state.lakmus) {
-    const lakmus = document.createElement('div');
-    lakmus.className = 'lakmus';
-    lakmus.id = 'lakmus';
-    lakmus.innerText = 'Lakmus';
-    lakmus.draggable = true;
-
-    lakmus.addEventListener('dragstart', ev => {
-      ev.dataTransfer.setData('item', 'lakmus-test');
-    });
-
-    document.getElementById('glass').appendChild(lakmus);
-    state.lakmus = true;
-    setStage(6);
-
-    instruction("Tahap 6: Tarik lakmus ke meja untuk melihat hasil");
-    return;
-  }
-
-  /* ===== 6. LAKMUS KE MEJA (HASIL) ===== */
-  if (item === "lakmus-test" && state.lakmus && !state.tested) {
-    const lak = document.getElementById('lakmus');
-    table.appendChild(lak);
-
-    if (state.type === "acid") {
-  lak.style.background = "#dc3545";
-  lak.style.color = "#fff";
-
-  document.getElementById('resultText').innerHTML = `
-    <h6 class="text-danger mb-2">
-      <i class="fa fa-vial"></i> Hasil Pengujian
-    </h6>
-
-    <p>
-      <b>Larutan bersifat ASAM</b>
-    </p>
-
-    <ul class="mb-2">
-      <li>Larutan yang diuji adalah <b>HCl (asam klorida)</b></li>
-      <li>Asam melepaskan ion <b>H<sup>+</sup></b> di dalam air</li>
-      <li>Lakmus berubah warna menjadi <b>merah</b></li>
-    </ul>
-
-    <p class="mb-0">
-      <b>Kesimpulan:</b> Perubahan warna lakmus menunjukkan bahwa larutan
-      memiliki sifat asam.
-    </p>
-  `;
-} else {
-  lak.style.background = "#0d6efd";
-  lak.style.color = "#fff";
-
-  document.getElementById('resultText').innerHTML = `
-    <h6 class="text-primary mb-2">
-      <i class="fa fa-vial"></i> Hasil Pengujian
-    </h6>
-
-    <p>
-      <b>Larutan bersifat BASA</b>
-    </p>
-
-    <ul class="mb-2">
-      <li>Larutan yang diuji adalah <b>NaOH (natrium hidroksida)</b></li>
-      <li>Basa melepaskan ion <b>OH<sup>−</sup></b> di dalam air</li>
-      <li>Lakmus berubah warna menjadi <b>biru</b></li>
-    </ul>
-
-    <p class="mb-0">
-      <b>Kesimpulan:</b> Perubahan warna lakmus menunjukkan bahwa larutan
-      memiliki sifat basa.
-    </p>
-  `;
-}
-
-document.getElementById('resultBox').classList.remove('d-none');
-
-/* GANTI EMOJI JADI ICON CEKLIS */
-instruction(`
-  <span class="text-success font-weight-bold">
-    <i class="fa fa-check-circle mr-1"></i>
-    Eksperimen selesai
-  </span>
-`);
-
-state.tested = true;
-
+    document.getElementById('resultBox').classList.remove('d-none');
+    instruction("✔ Pengujian selesai");
+    state.tested=true;
   }
 });
 
-function setStage(n) {
-  document.getElementById('stage').innerText = n;
+function setStage(n){ document.getElementById('stage').innerText=n; }
+function instruction(t){ document.getElementById('instruction').innerHTML=t; }
+
+function addResult(m,s,h){
+  document.getElementById('resultTable').innerHTML=
+  `<tr><td>${m}</td><td>${s}</td><td>${h}</td></tr>`;
 }
 
-
-
-
-/* =====================
-   INSTRUCTION TEXT
-===================== */
-function instruction(text) {
-  document.getElementById('instruction').innerHTML = text;
-}
-
-
-/* ===== RESET / ULANGI ===== */
-function resetExperiment() {
-  // Reset state
-  state = {
-    glass: false,
-    liquid: false,
-    pipet: false,
-    stirred: false,
-    lakmus: false,
-    tested: false,
-    type: null
-  };
-
-  // Hapus semua elemen di meja
-  table.innerHTML = '';
-
-  // Sembunyikan box hasil
+function resetExperiment(){
+  state={circuit:false,battery:false,lamp:false,tested:false};
+  table.innerHTML='';
   document.getElementById('resultBox').classList.add('d-none');
-
-  // Reset instruksi
-  instruction("Tahap 1: Seret gelas kimia");
+  setStage(1);
+  instruction("Tahap 1: Seret modul rangkaian ke area kerja");
 }
 
-/* ===== KEMBALI KE MENU ===== */
-function goBack() {
-  // halaman menu sebelumnya
-  window.location.href = 'beranda-teknik.html';
-}
-
-</script>
-
-<script>
-let recorder;
-let chunks = [];
-let stream;
-
-async function startRecord() {
-  chunks = [];
-
-  stream = await navigator.mediaDevices.getDisplayMedia({
-    video: true,
-    audio: true
-  });
-
-  recorder = new MediaRecorder(stream);
-
-  recorder.ondataavailable = e => {
-    if (e.data.size > 0) chunks.push(e.data);
-  };
-
-  recorder.onstop = () => {
-    const blob = new Blob(chunks, { type: 'video/webm' });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'eksperimen-kimia.webm';
-    document.body.appendChild(a);
-    a.click();
-
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
-
-    // ⛔ WAJIB: hentikan screen capture
-    stream.getTracks().forEach(track => track.stop());
-  };
-
-  recorder.start();
-}
-
-function stopRecord() {
-  if (recorder && recorder.state !== "inactive") {
-    recorder.stop();
-  }
+function goBack(){
+  location.href='beranda-teknik.html';
 }
 </script>
 
